@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import yelp from '../api/yelp';
 
 const ResultsShowScreen = ({ navigation }) => {
@@ -21,7 +21,14 @@ const ResultsShowScreen = ({ navigation }) => {
 
     return (
         <View style={styles.background}>
-            <Text>Results Show: {id}</Text>
+            <Text>{result.name}</Text>
+            <FlatList 
+            data={result.photos}
+            keyExtractor={(photo) => photo}
+            renderItem={({ item }) => {
+                return <Image style={styles.image} source={{ uri: item }} />
+            }}
+            />
         </View>
     );
 };
@@ -30,7 +37,13 @@ const styles = StyleSheet.create({
     background: {
         backgroundColor: 'white',
         flex: 1,
-    }
+    },
+    image: {
+        width: 250,
+        height: 120,
+        borderRadius: 4,
+        marginBottom: 5
+    },
 });
 
 export default ResultsShowScreen;
