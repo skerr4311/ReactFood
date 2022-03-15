@@ -5,9 +5,11 @@ import ResultsDetail from './ResultsDetail';
 const ResultsList = ({title, results}) => {
 
     return (
+        results.length > 0 ?
         <View style={styles.container}>
             <Text style={styles.title}>{title}</Text>
             <FlatList 
+                showsHorizontalScrollIndicator={false}
                 horizontal
                 data={results}
                 keyExtractor={(results) => results.id}
@@ -18,6 +20,7 @@ const ResultsList = ({title, results}) => {
                 }}
             />
         </View>
+        : null
     );
 };
 
